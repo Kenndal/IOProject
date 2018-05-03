@@ -1,20 +1,50 @@
 package logic;
 
-public abstract class Dimentions {
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
-    int space;
+import java.io.Serializable;
+
+abstract class Dimentions implements Serializable {
+
+    float space;
     int width;
     int height;
+    int[][] place;
 
-    public int getSpace() {
+    public float getSpace() {
         return space;
     }
 
-    public int getWidth() {
+    int getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    int getHeight() {
         return height;
+    }
+
+    int[][] getPlace(int width, int height){
+        for(int i=0;i<height;i++){
+            for(int j=0;j<width;j++){
+                place[i][j] = 0;
+            }
+        }
+        return place;
+    }
+
+
+    IntegerProperty getWidthProperty(){
+        return new SimpleIntegerProperty(width);
+    }
+
+    IntegerProperty getHightProprerty(){
+        return new SimpleIntegerProperty(height);
+    }
+
+    FloatProperty getSpaceProperty(){
+        return new SimpleFloatProperty(space);
     }
 }

@@ -14,17 +14,9 @@ public class FileManagment {
     public void writeToCSV(ArrayList<Container> containers, int nuberOfItems) {
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter("Conteiners.csv", true);
+            fileWriter = new FileWriter("resources/Conteiners.csv", true);
             for (int i = 0; i < nuberOfItems; i++) {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(containers.get(i).getTime()); // Conteiner time
-                stringBuilder.append(";");
-                stringBuilder.append(containers.get(i).getSpace()); // Space'
-                stringBuilder.append(";");
-                stringBuilder.append(containers.get(i).getWidth()); // Width
-                stringBuilder.append(";");
-                stringBuilder.append(containers.get(i).getHeight()); // Height
-                stringBuilder.append("\n");
+                StringBuilder stringBuilder = lineConteiners(containers.get(i));
                 fileWriter.write(stringBuilder.toString());
             }
             fileWriter.close();
@@ -32,6 +24,34 @@ public class FileManagment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void rewriteToCSV(ArrayList<Container> containers) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("resources/Conteiners.csv", false);
+            for (Container container : containers) {
+                StringBuilder stringBuilder = lineConteiners(container);
+                fileWriter.write(stringBuilder.toString());
+            }
+            fileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private StringBuilder lineConteiners(Container container){
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(container.getTime()); // Conteiner time
+            stringBuilder.append(";");
+            stringBuilder.append(container.getSpace()); // Space'
+            stringBuilder.append(";");
+            stringBuilder.append(container.getWidth()); // Width
+            stringBuilder.append(";");
+            stringBuilder.append(container.getHeight()); // Height
+            stringBuilder.append("\n");
+        return stringBuilder;
     }
 
         /**
@@ -43,7 +63,7 @@ public class FileManagment {
 
         ObjectOutputStream toSave = null;
         try {
-            FileOutputStream outputStream = new FileOutputStream("Conteiners.bin");
+            FileOutputStream outputStream = new FileOutputStream("resources/Conteiners.bin");
             toSave = new ObjectOutputStream(outputStream);
             toSave.writeObject(containers);
         } catch (IOException ex) {
@@ -57,14 +77,14 @@ public class FileManagment {
 
     /**
      * Load conteiners from File Conteiners.bin
-     * @param containers
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public ArrayList<Container> loadFile(ArrayList<Container> containers) throws IOException, ClassNotFoundException {
+    public ArrayList<Container> loadFile() throws IOException, ClassNotFoundException {
+        ArrayList<Container> containers = new ArrayList<>();
         ObjectInputStream toLoad = null;
         try {
-            FileInputStream input = new FileInputStream("Conteiners.bin");
+            FileInputStream input = new FileInputStream("resources/Conteiners.bin");
             toLoad = new ObjectInputStream(input);
             containers = (ArrayList<Container>) toLoad.readObject();
         } catch (IOException ex) {
@@ -74,5 +94,35 @@ public class FileManagment {
                 toLoad.close();
         }
         return containers;
+    }
+
+    /**
+     * Generate ending raport and write to CSV
+     * @param statistics
+     */
+    public void generateRaport(Statistics statistics){
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("resources/Raport.csv", true);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(statistics.getPercentOfLoad().get(0));
+            stringBuilder.append(";");
+            stringBuilder.append(statistics.getPercentOfLoad().get(1));
+            stringBuilder.append(";");
+            stringBuilder.append(statistics.getPercentOfLoad().get(2));
+            stringBuilder.append(";");
+            stringBuilder.append(statistics.getPercentOfLoad().get(3));
+            stringBuilder.append(";");
+            stringBuilder.append(statistics.getPercentOfLoad().get(4));
+            stringBuilder.append(";");
+            stringBuilder.append(statistics.getNumberOfConteiners());
+            stringBuilder.append("\n");
+            fileWriter.write(stringBuilder.toString());
+
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

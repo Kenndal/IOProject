@@ -2,7 +2,6 @@ package logic;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Comparator;
 import java.util.Date;
 
 public class Container extends Dimentions implements Serializable{
@@ -17,6 +16,8 @@ public class Container extends Dimentions implements Serializable{
         this.width = width;
         this.height = height;
         this.space = width*height;
+        place = new int[height][width];
+        getPlace(width,height);
 
     }
 
