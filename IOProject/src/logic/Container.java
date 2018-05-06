@@ -10,12 +10,10 @@ public class Container extends Dimentions implements Serializable{
 
 
     public Container(int width, int height) {
+        super(width, height);
         Date time =  new Date();
         Timestamp timestamp = new Timestamp(time.getTime());
         this.time = timestamp.getTime();
-        this.width = width;
-        this.height = height;
-        this.space = width*height;
         place = new int[height][width];
         getPlace(width,height);
 

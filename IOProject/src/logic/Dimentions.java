@@ -14,7 +14,13 @@ abstract class Dimentions implements Serializable {
     int height;
     int[][] place;
 
-    public float getSpace() {
+    Dimentions(int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.space = width*height;
+    }
+
+    float getSpace() {
         return space;
     }
 
@@ -35,16 +41,4 @@ abstract class Dimentions implements Serializable {
         return place;
     }
 
-
-    IntegerProperty getWidthProperty(){
-        return new SimpleIntegerProperty(width);
-    }
-
-    IntegerProperty getHightProprerty(){
-        return new SimpleIntegerProperty(height);
-    }
-
-    FloatProperty getSpaceProperty(){
-        return new SimpleFloatProperty(space);
-    }
 }

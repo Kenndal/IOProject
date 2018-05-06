@@ -8,9 +8,7 @@ public class Ship extends Dimentions{
 
 
     public Ship(int width, int height) {
-        this.width = width;
-        this.height = height;
-        this.space = width*height;
+        super(width, height);
         this.totalSpace = width*height;
         place = new int[height][width];
         getPlace(width,height);
