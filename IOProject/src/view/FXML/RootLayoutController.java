@@ -1,9 +1,14 @@
 package view.FXML;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.SystemApp;
 
@@ -16,6 +21,11 @@ public class RootLayoutController {
 
     @FXML
     private MenuItem informations;
+
+    @FXML
+    private MenuItem topKek;
+
+    private Pane layout;
 
     SystemApp systemApp;
 
@@ -39,6 +49,7 @@ public class RootLayoutController {
     }
 
 
+    @FXML
     public void handleExit(){
         try {
             systemApp.getSystem().getFileManagment().writeToFile(systemApp.getSystem().getContainers());
