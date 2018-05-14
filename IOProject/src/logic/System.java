@@ -36,11 +36,11 @@ public class System implements Serializable{
         ships.add(new Ship(30, 30));
     }
 
-    public void genarateConteiners(int numberOfConteiners) {
-            for (int i = 0; i < numberOfConteiners; i++) {
+    public void genarateConteiners(int numberOfContainers){
+            for (int i = 0; i < numberOfContainers; i++) {
                 containers.add(new Container(random.nextInt(5) + 5, random.nextInt(5) + 5));
             }
-            fileManagment.writeToCSV(containers, numberOfConteiners);
+            fileManagment.writeToCSV(containers, numberOfContainers);
             try {
                 fileManagment.writeToFile(containers);
             } catch (IOException e) {
@@ -53,17 +53,17 @@ public class System implements Serializable{
      * Send conteiners function
      * Algorithm to pack as many as it's possible
      * */
-    public Statistics sendConteiners() {
+    public Statistics sendContainers() {
         Algorithm algorithm = new Algorithm();
-        // Choose conteiners
+        // Choose contaners
         if (this.containers.size() >= 100) {
             for (int i = 0; i < 100; i++) {
-                algorithm.getChosenConteiners().add(this.containers.get(i));
+                algorithm.getChosenContainers().add(this.containers.get(i));
             }
 
         } else {
             for (int i = 0; i < this.containers.size(); i++) {
-                algorithm.getChosenConteiners().add(this.containers.get(i));
+                algorithm.getChosenContainers().add(this.containers.get(i));
             }
         }
 
@@ -84,9 +84,9 @@ public class System implements Serializable{
         }
     }
     public static void main(String[] args) {
-        float space = 0;
-        System system = new System();
 
+        // reset całego systemu
+        System system = new System();
         system.reset();
     }
 

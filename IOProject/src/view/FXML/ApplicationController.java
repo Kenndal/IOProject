@@ -13,7 +13,6 @@ import logic.Statistics;
 import view.SystemApp;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class ApplicationController {
 
@@ -21,10 +20,10 @@ public class ApplicationController {
     private Button generateButton;
 
     @FXML
-    private TextField sentConteinersTextField;
+    private TextField sentContainersTextField;
 
     @FXML
-    private TextField conteinresTextField;
+    private TextField containersTextField;
 
     @FXML
     private BarChart<String, Float> chart;
@@ -57,23 +56,27 @@ public class ApplicationController {
     }
 
     public void handleGenerate(){
-        if(conteinresTextField.getText() != null && conteinresTextField.getText().length() != 0 ) {
-            systemApp.getSystem().genarateConteiners(Integer.valueOf(conteinresTextField.getText()));
+        if(containersTextField.getText() != null ) {
+            try {
+                int tempNumberOfContainers = Integer.valueOf(containersTextField.getText());
+                if(tempNumberOfContainers >= 0)
+                    systemApp.getSystem().genarateConteiners(tempNumberOfContainers);
+                else{
+                    alertUp("Wartość nie może być mniejsza lub równa 0!");
+                }
+            }catch (RuntimeException e){
+                alertUp("Pole nie może pozostać puste przy generowaniu kontenerów, albo zawierać inne znaki niż liczby!");
+            }
             numberOfTextField.setText(String.valueOf(systemApp.getSystem().getContainers().size()));
 
         }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(systemApp.getPrimaryStage());
-            alert.setTitle("Uwaga!");
-            alert.setHeaderText("Żle wypełnione pole!");
-            alert.setContentText("Pole nie może pozostać puste przy generowaniu kontenerów!");
-            alert.showAndWait();
+            alertUp("Pole nie może pozostać puste przy generowaniu kontenerów, albo zawierać inne znaki niż liczby!");
         }
     }
 
     public void handleSend(){
         if(systemApp.getSystem().getContainers().size() != 0) {
-            statistics = systemApp.getSystem().sendConteiners();
+            statistics = systemApp.getSystem().sendContainers();
             numberOfTextField.setText(String.valueOf(systemApp.getSystem().getContainers().size()));
 
             xAxis.getCategories().clear();
@@ -87,7 +90,7 @@ public class ApplicationController {
 
             chart.getData().add(series);
 
-            sentConteinersTextField.setText(String.valueOf(statistics.getNumberOfConteiners()));
+            sentContainersTextField.setText(String.valueOf(statistics.getNumberOfContainers()));
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(systemApp.getPrimaryStage());
@@ -99,4 +102,15 @@ public class ApplicationController {
 
     }
 
+
+    private void alertUp(String alertMessage){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(systemApp.getPrimaryStage());
+        alert.setWidth(400);
+        alert.setHeight(400);
+        alert.setTitle("Uwaga!");
+        alert.setHeaderText("Żle wypełnione pole!");
+        alert.setContentText(alertMessage);
+        alert.showAndWait();
+    }
 }

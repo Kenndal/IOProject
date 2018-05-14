@@ -7,59 +7,59 @@ import java.util.Comparator;
 class Algorithm {
 
 
-    private ArrayList<Container> shippedConetiners = new ArrayList<>();
-    private ArrayList<Container> chosenConteiners = new ArrayList<>();
+    private ArrayList<Container> shippedContainers = new ArrayList<>();
+    private ArrayList<Container> chosenContainers = new ArrayList<>();
     private boolean isAll = true;
-    private float temporaryConteinersSpace;
+    private float temporaryContainersSpace;
     private int temporaryNumberOf;
     private Statistics statistics = new Statistics();
 
-    ArrayList<Container> getChosenConteiners() {
-        return chosenConteiners;
+    ArrayList<Container> getChosenContainers() {
+        return chosenContainers;
     }
 
     void sortConteiners(){
         //sort
-        Collections.sort(chosenConteiners, (Comparator<Container>) (o1, o2) -> {
+        Collections.sort(chosenContainers, (Comparator<Container>) (o1, o2) -> {
             String spaceString1 = Float.toString(o1.space);
             String spaceString2 = Float.toString(o2.space);
             return spaceString2.compareTo(spaceString1);
         });
     }
 
-    ArrayList<Container> packConteiners(ArrayList<Ship> ships, ArrayList<Container> allConteiners) {
+    ArrayList<Container> packConteiners(ArrayList<Ship> ships, ArrayList<Container> allContainers) {
         for (Ship ship : ships) {
             while (isAll) {
-                if(chosenConteiners.size() != 0) {
-                    for (int i = 0; i < chosenConteiners.size(); i++) {
-                        if (ship.checkSpace(chosenConteiners.get(i))) {
+                if(chosenContainers.size() != 0) {
+                    for (int i = 0; i < chosenContainers.size(); i++) {
+                        if (ship.checkSpace(chosenContainers.get(i))) {
                             // sent conteiner
-                            shippedConetiners.add(chosenConteiners.get(i));
+                            shippedContainers.add(chosenContainers.get(i));
                             // statistic parameters
-                            temporaryConteinersSpace = temporaryConteinersSpace + chosenConteiners.get(i).getSpace();
+                            temporaryContainersSpace = temporaryContainersSpace + chosenContainers.get(i).getSpace();
                             temporaryNumberOf++;
                             // remove send conteiner
-                            findAndRemove(chosenConteiners.get(i), allConteiners);
-                            chosenConteiners.remove(i);
+                            findAndRemove(chosenContainers.get(i), allContainers);
+                            chosenContainers.remove(i);
 
                             break;
                         }
-                        if (i == chosenConteiners.size() - 1) {
+                        if (i == chosenContainers.size() - 1) {
                             isAll = false;
                         }
                     }
                 }else isAll = false;
             }
             statistics.calcaluteSize(temporaryNumberOf);
-            statistics.calculatePercent(ship.getTotalSpace(),temporaryConteinersSpace);
+            statistics.calculatePercent(ship.getTotalSpace(), temporaryContainersSpace);
 
             isAll = true;
             temporaryNumberOf = 0;
-            temporaryConteinersSpace = 0;
+            temporaryContainersSpace = 0;
 
             ship.resetShip();
         }
-        return allConteiners;
+        return allContainers;
     }
 
     private void findAndRemove(Container container,ArrayList<Container> containers){
@@ -75,7 +75,7 @@ class Algorithm {
         return statistics;
     }
 
-    ArrayList<Container> getShippedConetiners() {
-        return shippedConetiners;
+    ArrayList<Container> getShippedContainers() {
+        return shippedContainers;
     }
 }

@@ -26,7 +26,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="conteinresTextField" layoutX="11.0" layoutY="52.0" prefHeight="31.0" prefWidth="200.0" promptText="Ilość kontenerów" />
+                                    <TextField fx:id="containersTextField" layoutX="11.0" layoutY="52.0" prefHeight="31.0" prefWidth="200.0" promptText="Ilość kontenerów" />
                                     <Button fx:id="generateButton" layoutX="11.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleGenerate" prefHeight="31.0" prefWidth="200.0" text="Generuj" />
                                  </children>
                               </AnchorPane>
@@ -83,7 +83,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="sentConteinersTextField" editable="false" prefHeight="31.0" prefWidth="245.0">
+                              <TextField fx:id="sentContainersTextField" editable="false" prefHeight="31.0" prefWidth="245.0">
                                  <HBox.margin>
                                     <Insets left="10.0" top="7.0" />
                                  </HBox.margin>

@@ -100,25 +100,24 @@ public class FileManagment {
      * Generate ending raport and write to CSV
      * @param statistics
      */
-    public void generateRaport(Statistics statistics){
+    void generateRaport(Statistics statistics){
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter("resources/Raport.csv", true);
 
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(statistics.getPercentOfLoad().get(0));
-            stringBuilder.append(";");
-            stringBuilder.append(statistics.getPercentOfLoad().get(1));
-            stringBuilder.append(";");
-            stringBuilder.append(statistics.getPercentOfLoad().get(2));
-            stringBuilder.append(";");
-            stringBuilder.append(statistics.getPercentOfLoad().get(3));
-            stringBuilder.append(";");
-            stringBuilder.append(statistics.getPercentOfLoad().get(4));
-            stringBuilder.append(";");
-            stringBuilder.append(statistics.getNumberOfConteiners());
-            stringBuilder.append("\n");
-            fileWriter.write(stringBuilder.toString());
+            String stringBuilder = String.valueOf(statistics.getPercentOfLoad().get(0)) +
+                    ";" +
+                    statistics.getPercentOfLoad().get(1) +
+                    ";" +
+                    statistics.getPercentOfLoad().get(2) +
+                    ";" +
+                    statistics.getPercentOfLoad().get(3) +
+                    ";" +
+                    statistics.getPercentOfLoad().get(4) +
+                    ";" +
+                    statistics.getNumberOfContainers() +
+                    "\n";
+            fileWriter.write(stringBuilder);
 
             fileWriter.close();
         } catch (IOException e) {
