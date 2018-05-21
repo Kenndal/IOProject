@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Container extends Dimentions implements Serializable{
 
-    private long time;
+    private long time; // specific time of generate container
 
 
     public Container(int width, int height) {

@@ -8,7 +8,7 @@ public class System implements Serializable{
 
     private ArrayList<Container> containers = new ArrayList<Container>();
     private Random random = new Random();
-    private ArrayList<Ship> ships = new ArrayList<Ship>();
+    private ArrayList<Carrier> ships = new ArrayList<Carrier>();
     private FileManagment fileManagment = new FileManagment();
 
 
@@ -24,9 +24,13 @@ public class System implements Serializable{
         return containers;
     }
 
-    public ArrayList<Ship> getShips() {
+    public ArrayList<Carrier> getShips() {
         return ships;
     }
+
+    /**
+     * Static adding 5 ships
+     */
 
     private void setShips() {
         ships.add(new Ship(55, 20));
@@ -36,6 +40,10 @@ public class System implements Serializable{
         ships.add(new Ship(30, 30));
     }
 
+    /**
+     *  Function to generate N containers
+     * @param numberOfContainers
+     */
     public void genarateConteiners(int numberOfContainers){
             for (int i = 0; i < numberOfContainers; i++) {
                 containers.add(new Container(random.nextInt(5) + 5, random.nextInt(5) + 5));
@@ -66,11 +74,16 @@ public class System implements Serializable{
                 algorithm.getChosenContainers().add(this.containers.get(i));
             }
         }
-
+        // Sort containers before packing
         algorithm.sortConteiners();
+
+
         this.containers = algorithm.packConteiners(this.ships, this.containers);
+
+        // update data files
         fileManagment.rewriteToCSV(this.containers);
         fileManagment.generateRaport(algorithm.getStatistics());
+        // return statistics to show them
         return algorithm.getStatistics();
     }
 
@@ -85,7 +98,7 @@ public class System implements Serializable{
     }
     public static void main(String[] args) {
 
-        // reset całego systemu
+        // reset system
         System system = new System();
         system.reset();
     }
