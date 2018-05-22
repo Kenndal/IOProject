@@ -1,6 +1,8 @@
 package logic;
 
 
+import logic.algorithm.Algorithm;
+
 import java.io.*;
 import java.util.*;
 public class System implements Serializable{
@@ -8,7 +10,7 @@ public class System implements Serializable{
 
     private ArrayList<Container> containers = new ArrayList<Container>();
     private Random random = new Random();
-    private ArrayList<Carrier> ships = new ArrayList<Carrier>();
+    private ArrayList<Ship> ships = new ArrayList<Ship>();
     private FileManagment fileManagment = new FileManagment();
 
 
@@ -24,7 +26,7 @@ public class System implements Serializable{
         return containers;
     }
 
-    public ArrayList<Carrier> getShips() {
+    public ArrayList<Ship> getShips() {
         return ships;
     }
 
@@ -87,6 +89,9 @@ public class System implements Serializable{
         return algorithm.getStatistics();
     }
 
+    /**
+     * reset all files in application
+     */
 
     private void reset(){
         try {

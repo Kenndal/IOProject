@@ -1,10 +1,14 @@
-package logic;
+package logic.algorithm;
+
+import logic.Container;
+import logic.Ship;
+import logic.Statistics;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-class Algorithm {
+public class Algorithm {
 
 
     private ArrayList<Container> shippedContainers = new ArrayList<>();
@@ -14,7 +18,7 @@ class Algorithm {
     private int temporaryNumberOf;
     private Statistics statistics = new Statistics();
 
-    ArrayList<Container> getChosenContainers() {
+    public ArrayList<Container> getChosenContainers() {
         return chosenContainers;
     }
 
@@ -22,11 +26,11 @@ class Algorithm {
      * Sort containers before pack to ship.
      */
 
-    void sortConteiners(){
+    public void sortConteiners(){
         //sort
         Collections.sort(chosenContainers, (Comparator<Container>) (o1, o2) -> {
-            String spaceString1 = Float.toString(o1.space);
-            String spaceString2 = Float.toString(o2.space);
+            String spaceString1 = Float.toString(o1.getSpace());
+            String spaceString2 = Float.toString(o2.getSpace());
             return spaceString2.compareTo(spaceString1);
         });
     }
@@ -40,10 +44,9 @@ class Algorithm {
      */
 
 
-    ArrayList<Container> packConteiners(ArrayList<Carrier> carriers, ArrayList<Container> allContainers) {
-        for (Carrier ship : carriers) {
-            PackContainer packContainer = new PackContainer();
-            packContainer.setShip((Ship) ship);
+    public ArrayList<Container> packConteiners(ArrayList<Ship> carriers, ArrayList<Container> allContainers) {
+        for (Ship ship : carriers) {
+            PackContainer packContainer = new PackContainer(ship);
             while (isAll) {
                 if(chosenContainers.size() != 0) {
                     for (int i = 0; i < chosenContainers.size(); i++) {
@@ -94,11 +97,11 @@ class Algorithm {
         }
     }
 
-    Statistics getStatistics() {
+    public Statistics getStatistics() {
         return statistics;
     }
 
-    ArrayList<Container> getShippedContainers() {
+    public ArrayList<Container> getShippedContainers() {
         return shippedContainers;
     }
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class Container extends Dimentions implements Serializable{
+public class Container extends Dimensions implements Serializable{
 
     private long time; // specific time of generate container
 
@@ -15,7 +15,7 @@ public class Container extends Dimentions implements Serializable{
         Timestamp timestamp = new Timestamp(time.getTime());
         this.time = timestamp.getTime();
         place = new int[height][width];
-        getPlace(width,height);
+        setPlace(width,height); // must be here, because of null pointer in Dimensions class
 
     }
 

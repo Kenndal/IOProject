@@ -11,7 +11,7 @@ public class FileManagment {
      * @param containers
      * @param nuberOfItems
      */
-    public void writeToCSV(ArrayList<Container> containers, int nuberOfItems) {
+    void writeToCSV(ArrayList<Container> containers, int nuberOfItems) {
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter("resources/Conteiners.csv", true);
@@ -26,7 +26,7 @@ public class FileManagment {
         }
     }
 
-    public void rewriteToCSV(ArrayList<Container> containers) {
+    void rewriteToCSV(ArrayList<Container> containers) {
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter("resources/Conteiners.csv", false);

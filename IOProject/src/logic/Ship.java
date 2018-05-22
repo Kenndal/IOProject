@@ -2,19 +2,19 @@ package logic;
 
 import java.lang.System;
 
-public class Ship extends Dimentions implements Carrier {
+public class Ship extends Dimensions {
 
-    private int totalSpace; // maximal field value
+    private int totalSpace; // maximal field value doesn't change during packing
 
 
     public Ship(int width, int height) {
         super(width, height);
         this.totalSpace = width*height;
         place = new int[height][width];
-        getPlace(width,height);
+        setPlace(width,height); // must be here, because of null pointer in Dimensions class
     }
 
-    @Override
+
     public void printPlace(){
         for (int i=0;i<height;i++){
             for (int j=0;j<width;j++){
@@ -24,14 +24,12 @@ public class Ship extends Dimentions implements Carrier {
         }
     }
 
-    @Override
     public int getTotalSpace() {
         return totalSpace;
     }
 
-    @Override
     public void resetCarrier(){
         space = width*height;
-        getPlace(width,height);
+        setPlace(width,height);
     }
 }

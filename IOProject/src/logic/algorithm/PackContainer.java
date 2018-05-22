@@ -1,10 +1,13 @@
-package logic;
+package logic.algorithm;
 
-public class PackContainer {
+import logic.Container;
+import logic.Ship;
+
+class PackContainer {
 
     private Ship ship;
 
-    public void setShip(Ship ship) {
+    PackContainer(Ship ship) {
         this.ship = ship;
     }
 
@@ -20,18 +23,18 @@ public class PackContainer {
         int positionX;
         int positionY ;
         // find potential space
-        for(positionX = 0;positionX<ship.height;positionX++) {
-            for (positionY = 0; positionY < ship.width; positionY++) {
-                if(ship.place[positionX][positionY] == 0) {
+        for(positionX = 0; positionX< ship.getHeight(); positionX++) {
+            for (positionY = 0; positionY < ship.getWidth(); positionY++) {
+                if(ship.getPlace()[positionX][positionY] == 0) {
                     k = 0;
                     // look for available space in height
                     while (k < container.getHeight()) {
                         // check height out of bound
-                        if ((positionX + k) >= ship.height) {
+                        if ((positionX + k) >= ship.getHeight()) {
                             checkOutOfBound = true;
                             break;
                         }
-                        if (ship.place[positionX + k][positionY] != 0) {
+                        if (ship.getPlace()[positionX + k][positionY] != 0) {
                             checkIsOne = true;
                             break;
                         }
@@ -46,11 +49,11 @@ public class PackContainer {
                         // look for available space in width
                         while (k < container.getWidth()) {
                             // check width out of bound
-                            if ((positionY + k) >= ship.width) {
+                            if ((positionY + k) >= ship.getWidth()) {
                                 checkOutOfBound = true;
                                 break;
                             }
-                            if (ship.place[positionX][positionY + k] != 0) {
+                            if (ship.getPlace()[positionX][positionY + k] != 0) {
                                 checkIsOne = true;
                                 break;
                             }
@@ -81,7 +84,7 @@ public class PackContainer {
 
         for(int i = positionX;i<positionX+container.getHeight();i++){
             for(int j = positionY;j<positionY+container.getWidth();j++){
-                ship.place[i][j] = 1;
+                ship.getPlace()[i][j] = 1;
             }
         }
 
@@ -92,7 +95,7 @@ public class PackContainer {
      * @param container
      */
     private void changeSpace(Container container){
-        ship.space = ship.space - container.getSpace();
+        ship.setSpace(ship.getSpace() - container.getSpace());
     }
 
 }
