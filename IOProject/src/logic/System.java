@@ -51,6 +51,7 @@ public class System implements Serializable{
     public void loadExternalData(String path){
         reset();
         loaderCSV.load(path);
+        loaderCSV.sortContainers();
         containers = loaderCSV.getContainers();
         try {
             fileManagement.writeToFile(containers);
@@ -130,11 +131,4 @@ public class System implements Serializable{
     public void subscribe(Observer observer){
         this.observer = observer;
     }
-    public static void main(String[] args) {
-
-        // reset system
-        System system = new System();
-        system.reset();
-    }
-
 }

@@ -5,7 +5,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.System;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -87,5 +90,13 @@ public class LoaderCSV {
      */
     private void resetErrors(){
         errors.clear();
+    }
+
+    void sortContainers() {
+        Collections.sort(containers, (Comparator<Container>) (o1, o2) -> {
+            String time1 = Long.toString(o1.getTime());
+            String time2 = Long.toString(o2.getTime());
+            return time1.compareTo(time2);
+        });
     }
 }
