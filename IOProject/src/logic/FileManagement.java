@@ -2,20 +2,20 @@ package logic;
 import java.io.*;
 import java.util.ArrayList;
 
-public class FileManagment {
+public class FileManagement {
 
 
     /**
-     * Write informations about conteiners to CSV file Conteiners.csv
+     * Write information about containers to CSV file Containers.csv
      *
      * @param containers
-     * @param nuberOfItems
+     * @param numberOfItems
      */
-    void writeToCSV(ArrayList<Container> containers, int nuberOfItems) {
+    void writeToCSV(ArrayList<Container> containers, int numberOfItems) {
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter("resources/Conteiners.csv", true);
-            for (int i = 0; i < nuberOfItems; i++) {
+            fileWriter = new FileWriter("resources/Containers.csv", true);
+            for (int i = 0; i < numberOfItems; i++) {
                 StringBuilder stringBuilder = lineConteiners(containers.get(i));
                 fileWriter.write(stringBuilder.toString());
             }
@@ -29,7 +29,7 @@ public class FileManagment {
     void rewriteToCSV(ArrayList<Container> containers) {
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter("resources/Conteiners.csv", false);
+            fileWriter = new FileWriter("resources/Containers.csv", false);
             for (Container container : containers) {
                 StringBuilder stringBuilder = lineConteiners(container);
                 fileWriter.write(stringBuilder.toString());
@@ -44,18 +44,18 @@ public class FileManagment {
     private StringBuilder lineConteiners(Container container){
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(container.getTime()); // Conteiner time
-            stringBuilder.append(";");
+            stringBuilder.append(",");
             stringBuilder.append(container.getSpace()); // Space'
-            stringBuilder.append(";");
+            stringBuilder.append(",");
             stringBuilder.append(container.getWidth()); // Width
-            stringBuilder.append(";");
+            stringBuilder.append(",");
             stringBuilder.append(container.getHeight()); // Height
             stringBuilder.append("\n");
         return stringBuilder;
     }
 
         /**
-         * Write conteiners to file Conteiners.bin
+         * Write containers to file Containers.bin
          * @param containers
          */
 
@@ -63,11 +63,11 @@ public class FileManagment {
 
         ObjectOutputStream toSave = null;
         try {
-            FileOutputStream outputStream = new FileOutputStream("resources/Conteiners.bin");
+            FileOutputStream outputStream = new FileOutputStream("resources/Containers.bin");
             toSave = new ObjectOutputStream(outputStream);
             toSave.writeObject(containers);
         } catch (IOException ex) {
-            java.lang.System.out.println("Blad w zapisie do pliku 'Conteiners.bin'");
+            java.lang.System.out.println("Blad w zapisie do pliku 'Containers.bin'");
         } finally {
             if (toSave != null)
                 toSave.close();
@@ -76,7 +76,7 @@ public class FileManagment {
 
 
     /**
-     * Load conteiners from File Conteiners.bin
+     * Load containers from File Containers.bin
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -84,7 +84,7 @@ public class FileManagment {
         ArrayList<Container> containers = new ArrayList<>();
         ObjectInputStream toLoad = null;
         try {
-            FileInputStream input = new FileInputStream("resources/Conteiners.bin");
+            FileInputStream input = new FileInputStream("resources/Containers.bin");
             toLoad = new ObjectInputStream(input);
             containers = (ArrayList<Container>) toLoad.readObject();
         } catch (IOException ex) {
@@ -97,7 +97,7 @@ public class FileManagment {
     }
 
     /**
-     * Generate ending raport and write to CSV
+     * Generate ending report and write to CSV
      * @param statistics
      */
     void generateRaport(Statistics statistics){
@@ -106,15 +106,15 @@ public class FileManagment {
             fileWriter = new FileWriter("resources/Raport.csv", true);
 
             String stringBuilder = String.valueOf(statistics.getPercentOfLoad().get(0)) +
-                    ";" +
+                    "," +
                     statistics.getPercentOfLoad().get(1) +
-                    ";" +
+                    "," +
                     statistics.getPercentOfLoad().get(2) +
-                    ";" +
+                    "," +
                     statistics.getPercentOfLoad().get(3) +
-                    ";" +
+                    "," +
                     statistics.getPercentOfLoad().get(4) +
-                    ";" +
+                    "," +
                     statistics.getNumberOfContainers() +
                     "\n";
             fileWriter.write(stringBuilder);

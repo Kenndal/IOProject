@@ -15,6 +15,9 @@ public class Ship extends Dimensions {
     }
 
 
+    /**
+     * Print space in the ship
+     */
     public void printPlace(){
         for (int i=0;i<height;i++){
             for (int j=0;j<width;j++){
@@ -24,10 +27,19 @@ public class Ship extends Dimensions {
         }
     }
 
+    /**
+     * Get maximal ship's space
+     * @return total space of ship
+     */
+
     public int getTotalSpace() {
         return totalSpace;
     }
 
+    /**
+     *  Reset using space in the ship
+     *  Used before every containers pack
+     */
     public void resetCarrier(){
         space = width*height;
         setPlace(width,height);

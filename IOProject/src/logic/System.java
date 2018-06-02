@@ -5,21 +5,23 @@ import logic.algorithm.Algorithm;
 
 import java.io.*;
 import java.util.*;
+
 public class System implements Serializable{
 
 
     private ArrayList<Container> containers = new ArrayList<Container>();
     private Random random = new Random();
     private ArrayList<Ship> ships = new ArrayList<Ship>();
-    private FileManagment fileManagment = new FileManagment();
-
+    private FileManagement fileManagement = new FileManagement(); // manage in program files
+    private LoaderCSV loaderCSV = new LoaderCSV(); // load external csv files
+    private Observer observer; // observer to updates text fields in GUI
 
     public System() {
         setShips();
     }
 
-    public FileManagment getFileManagment() {
-        return fileManagment;
+    public FileManagement getFileManagement() {
+        return fileManagement;
     }
 
     public ArrayList<Container> getContainers() {
@@ -30,29 +32,46 @@ public class System implements Serializable{
         return ships;
     }
 
+    public LoaderCSV getLoaderCSV() {
+        return loaderCSV;
+    }
+
     /**
      * Static adding 5 ships
      */
 
     private void setShips() {
-        ships.add(new Ship(55, 20));
-        ships.add(new Ship(40, 25));
-        ships.add(new Ship(50, 20));
-        ships.add(new Ship(60, 10));
-        ships.add(new Ship(30, 30));
+        ships.add(new Ship(90, 91));
+        ships.add(new Ship(90, 42));
+        ships.add(new Ship(92, 48));
+        ships.add(new Ship(58, 64));
+        ships.add(new Ship(70, 51));
+    }
+
+    public void loadExternalData(String path){
+        reset();
+        loaderCSV.load(path);
+        containers = loaderCSV.getContainers();
+        try {
+            fileManagement.writeToFile(containers);
+            fileManagement.writeToCSV(containers,containers.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        observer.inform(); // inform GUI about changes
     }
 
     /**
      *  Function to generate N containers
      * @param numberOfContainers
      */
-    public void genarateConteiners(int numberOfContainers){
+    public void generateContainers(int numberOfContainers){
             for (int i = 0; i < numberOfContainers; i++) {
                 containers.add(new Container(random.nextInt(5) + 5, random.nextInt(5) + 5));
             }
-            fileManagment.writeToCSV(containers, numberOfContainers);
+            fileManagement.writeToCSV(containers, numberOfContainers);
             try {
-                fileManagment.writeToFile(containers);
+                fileManagement.writeToFile(containers);
             } catch (IOException e) {
                 java.lang.System.out.println("Debug KEK ");
             }
@@ -60,31 +79,31 @@ public class System implements Serializable{
 
 
     /**
-     * Send conteiners function
+     * Send containers function
      * Algorithm to pack as many as it's possible
      * */
     public Statistics sendContainers() {
         Algorithm algorithm = new Algorithm();
-        // Choose contaners
+        // Choose containers
         if (this.containers.size() >= 100) {
             for (int i = 0; i < 100; i++) {
                 algorithm.getChosenContainers().add(this.containers.get(i));
             }
 
         } else {
-            for (int i = 0; i < this.containers.size(); i++) {
-                algorithm.getChosenContainers().add(this.containers.get(i));
+            for (Container container : this.containers) {
+                algorithm.getChosenContainers().add(container);
             }
         }
         // Sort containers before packing
         algorithm.sortConteiners();
 
 
-        this.containers = algorithm.packConteiners(this.ships, this.containers);
+        this.containers = algorithm.packContainers(this.ships, this.containers);
 
         // update data files
-        fileManagment.rewriteToCSV(this.containers);
-        fileManagment.generateRaport(algorithm.getStatistics());
+        fileManagement.rewriteToCSV(this.containers);
+        fileManagement.generateRaport(algorithm.getStatistics());
         // return statistics to show them
         return algorithm.getStatistics();
     }
@@ -93,13 +112,23 @@ public class System implements Serializable{
      * reset all files in application
      */
 
-    private void reset(){
+    public void reset(){
         try {
-            fileManagment.writeToFile(containers);
-            fileManagment.rewriteToCSV(containers);
+            this.containers.clear();
+            fileManagement.writeToFile(containers);
+            fileManagement.rewriteToCSV(containers);
+            observer.inform(); // inform GUI about changes
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     *  make subscribe to class, who observe this class
+     * @param observer
+     */
+    public void subscribe(Observer observer){
+        this.observer = observer;
     }
     public static void main(String[] args) {
 

@@ -44,7 +44,7 @@ public class Algorithm {
      */
 
 
-    public ArrayList<Container> packConteiners(ArrayList<Ship> carriers, ArrayList<Container> allContainers) {
+    public ArrayList<Container> packContainers(ArrayList<Ship> carriers, ArrayList<Container> allContainers) {
         for (Ship ship : carriers) {
             PackContainer packContainer = new PackContainer(ship);
             while (isAll) {

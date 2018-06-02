@@ -9,12 +9,13 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import logic.Observer;
 import logic.Statistics;
 import view.SystemApp;
 
 import java.util.Arrays;
 
-public class ApplicationController {
+public class ApplicationController implements Observer {
 
     @FXML
     private Button generateButton;
@@ -53,6 +54,7 @@ public class ApplicationController {
     public void setSystemApp(SystemApp systemApp){
         this.systemApp = systemApp;
         numberOfTextField.setText(String.valueOf(systemApp.getSystem().getContainers().size()));
+        this.systemApp.getSystem().subscribe(this); // start observe the System class to update information
     }
 
     public void handleGenerate(){
@@ -60,7 +62,7 @@ public class ApplicationController {
             try {
                 int tempNumberOfContainers = Integer.valueOf(containersTextField.getText());
                 if(tempNumberOfContainers >= 0)
-                    systemApp.getSystem().genarateConteiners(tempNumberOfContainers);
+                    systemApp.getSystem().generateContainers(tempNumberOfContainers);
                 else{
                     alertUp("Wartość nie może być mniejsza lub równa 0!");
                 }
@@ -112,5 +114,13 @@ public class ApplicationController {
         alert.setHeaderText("Żle wypełnione pole!");
         alert.setContentText(alertMessage);
         alert.showAndWait();
+    }
+
+    /**
+     * Refresh text field every time when it's changing
+     */
+    @Override
+    public void inform() {
+        numberOfTextField.setText(String.valueOf(systemApp.getSystem().getContainers().size()));
     }
 }

@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.System;
@@ -41,7 +40,7 @@ public class SystemApp extends Application {
         this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 try {
-                    system.getFileManagment().writeToFile(system.getContainers());
+                    system.getFileManagement().writeToFile(system.getContainers());
                 } catch (IOException e) {
                 }
             }
@@ -50,12 +49,12 @@ public class SystemApp extends Application {
 
     public SystemApp() {
         try {
-            system.getContainers().addAll(system.getFileManagment().loadFile());
+            system.getContainers().addAll(system.getFileManagement().loadFile());
         } catch (IOException | ClassNotFoundException ignored) {
         }
     }
 
-    public void initRootLayout() {
+    private void initRootLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -70,12 +69,15 @@ public class SystemApp extends Application {
             // Set controller
             RootLayoutController controller = loader.getController();
             controller.setSystemApp(this);
+            controller.setPrimaryStage(primaryStage);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void showSystemOverview() {
+    private void showSystemOverview() {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();

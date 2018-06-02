@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="86.0">logic.Ship</node>
+    <node x="200.0" y="248.0">view.SystemApp</node>
+    <node x="0.0" y="329.0">logic.LoaderCSV</node>
+    <node x="39.75" y="0.0">logic.Dimensions</node>
+    <node x="0.0" y="167.0">view.FXML.RootLayoutController</node>
+    <node x="0.0" y="248.0">logic.algorithm.PackContainer</node>
+    <node x="280.0" y="86.0">view.FXML.ApplicationController</node>
+    <node x="0.0" y="410.0">logic.System</node>
+    <node x="351.0" y="329.0">logic.Statistics</node>
+    <node x="178.0" y="329.0">logic.algorithm.Algorithm</node>
+    <node x="110.0" y="86.0">logic.Container</node>
+    <node x="322.0" y="0.0">logic.Observer</node>
+    <node x="248.0" y="167.0">logic.FileManagement</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="logic.Ship" target="logic.Dimensions">
+      <point x="0.0" y="-18.0" />
+      <point x="45.0" y="61.0" />
+      <point x="74.25" y="61.0" />
+      <point x="-34.5" y="18.0" />
+    </edge>
+    <edge source="view.FXML.ApplicationController" target="logic.Observer">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="logic.Container" target="logic.Dimensions">
+      <point x="0.0" y="-18.0" />
+      <point x="172.5" y="61.0" />
+      <point x="143.25" y="61.0" />
+      <point x="34.5" y="18.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="69.0" y="341.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
