@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.System;
 import view.FXML.ApplicationController;
 import view.FXML.RootLayoutController;
+import view.FXML.TopKekController;
 
 import java.io.IOException;
 
@@ -79,19 +81,45 @@ public class SystemApp extends Application {
 
     private void showSystemOverview() {
         try {
-            // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(SystemApp.class.getResource("FXML/ApplicationView.fxml"));
             AnchorPane applicationView = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
             rootLayout.setCenter(applicationView);
 
-            // Set controller
             ApplicationController applicationController = loader.getController();
             applicationController.setSystemApp(this);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Boolean showTopKekImage(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(SystemApp.class.getResource("fxml/TopKek.fxml"));
+            AnchorPane page = null;
+            page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("TopKek");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            dialogStage.getIcons().add(new Image("file:resources/Top_Kek.png"));
+
+
+            TopKekController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

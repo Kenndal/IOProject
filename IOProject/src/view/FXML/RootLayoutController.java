@@ -83,6 +83,12 @@ public class RootLayoutController {
     }
 
     @FXML
+    private void handleKEK(){
+        boolean closeClicked = systemApp.showTopKekImage();
+    }
+
+
+    @FXML
     private void handleAbout(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("file:resources/Top_Kek.png"));

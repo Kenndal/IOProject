@@ -2,12 +2,9 @@ package logic;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.System;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -40,8 +37,6 @@ public class LoaderCSV {
                     containers.add(container);
 
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,7 +88,7 @@ public class LoaderCSV {
     }
 
     void sortContainers() {
-        Collections.sort(containers, (Comparator<Container>) (o1, o2) -> {
+        containers.sort((Comparator<Container>) (o1, o2) -> {
             String time1 = Long.toString(o1.getTime());
             String time2 = Long.toString(o2.getTime());
             return time1.compareTo(time2);

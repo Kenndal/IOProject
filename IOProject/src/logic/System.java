@@ -9,9 +9,9 @@ import java.util.*;
 public class System implements Serializable{
 
 
-    private ArrayList<Container> containers = new ArrayList<Container>();
+    private ArrayList<Container> containers = new ArrayList<>();
     private Random random = new Random();
-    private ArrayList<Ship> ships = new ArrayList<Ship>();
+    private ArrayList<Ship> ships = new ArrayList<>();
     private FileManagement fileManagement = new FileManagement(); // manage in program files
     private LoaderCSV loaderCSV = new LoaderCSV(); // load external csv files
     private Observer observer; // observer to updates text fields in GUI
