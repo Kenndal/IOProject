@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Main class with pack algorithm
+ */
 public class Algorithm {
 
 
@@ -71,7 +74,7 @@ public class Algorithm {
                 }else isAll = false;
             }
             // generate statistics from ship load
-            statistics.calcaluteSize(temporaryNumberOf);
+            statistics.calculateSize(temporaryNumberOf);
             statistics.calculatePercent(ship.getTotalSpace(), temporaryContainersSpace);
 
             isAll = true;

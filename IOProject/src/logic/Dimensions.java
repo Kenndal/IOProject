@@ -2,6 +2,9 @@ package logic;
 
 import java.io.Serializable;
 
+/**
+ * Abstract class with main parameters of ships and containers
+ */
 abstract class Dimensions implements Serializable {
 
     float space;

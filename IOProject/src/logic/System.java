@@ -6,6 +6,10 @@ import logic.algorithm.Algorithm;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Main class in System
+ * Contain all data and main functions of system
+ */
 public class System implements Serializable{
 
 

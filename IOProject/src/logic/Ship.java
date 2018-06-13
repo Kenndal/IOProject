@@ -2,6 +2,9 @@ package logic;
 
 import java.lang.System;
 
+/**
+ *  Class Ship containing all parameters and specific functions of ships
+ */
 public class Ship extends Dimensions {
 
     private int totalSpace; // maximal field value doesn't change during packing

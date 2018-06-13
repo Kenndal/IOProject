@@ -2,6 +2,9 @@ package logic;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Class, which is used to read/write/rewrite files included in system
+ */
 public class FileManagement {
 
 
@@ -43,7 +46,7 @@ public class FileManagement {
 
     private StringBuilder lineContainers(Container container){
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(container.getTime()); // Conteiner time
+            stringBuilder.append(container.getTime()); // Container time
             stringBuilder.append(",");
             stringBuilder.append(container.getSpace()); // Space'
             stringBuilder.append(",");

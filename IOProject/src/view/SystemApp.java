@@ -17,6 +17,9 @@ import view.FXML.TopKekController;
 
 import java.io.IOException;
 
+/**
+ * Main GUI Application class
+ */
 public class SystemApp extends Application {
 
     private Stage primaryStage;
@@ -58,7 +61,6 @@ public class SystemApp extends Application {
 
     /**
      * Init tje root layout in GUI
-     *
      */
     private void initRootLayout() {
         try {

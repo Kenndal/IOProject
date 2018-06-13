@@ -2,6 +2,9 @@ package logic;
 
 import java.util.ArrayList;
 
+/**
+ * Class where system generated all pack statistics
+ */
 public class Statistics {
 
     private ArrayList<Integer> numberOfContainers = new ArrayList<>();
@@ -11,7 +14,7 @@ public class Statistics {
      *  adding number of containers, which was packed to ship
      * @param number
      */
-    public void calcaluteSize(int number){
+    public void calculateSize(int number){
         this.numberOfContainers.add(number);
     }
 
@@ -30,8 +33,8 @@ public class Statistics {
      */
     public int getNumberOfContainers() {
         int totalNumberOfSentContainers = 0;
-        for (Integer conteiners : numberOfContainers) {
-            totalNumberOfSentContainers = totalNumberOfSentContainers + conteiners;
+        for (Integer containers : numberOfContainers) {
+            totalNumberOfSentContainers = totalNumberOfSentContainers + containers;
         }
         return totalNumberOfSentContainers;
     }

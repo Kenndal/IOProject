@@ -3,6 +3,9 @@ package logic.algorithm;
 import logic.Container;
 import logic.Ship;
 
+/**
+ *  Class with pack algorithm
+ */
 class PackContainer {
 
     private Ship ship;
