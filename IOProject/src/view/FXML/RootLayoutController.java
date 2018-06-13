@@ -40,6 +40,9 @@ public class RootLayoutController {
 
     }
 
+    /**
+     * Menu item function to load external files with containers
+     */
     @FXML
     private void handleLoad(){
         String errors = "";
@@ -58,7 +61,7 @@ public class RootLayoutController {
             if(systemApp.getSystem().getLoaderCSV().getErrors().size() != 0){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initOwner(systemApp.getPrimaryStage());
-                alert.setWidth(400);
+                alert.setWidth(700);
                 alert.setHeight(700);
                 alert.setTitle("Uwaga!");
                 alert.setHeaderText("Błąd formatu danych");
@@ -72,6 +75,9 @@ public class RootLayoutController {
         }
     }
 
+    /**
+     * Menu item function to reset system data in application and files
+     */
     @FXML
     private void handleReset(){
         systemApp.getSystem().reset();
@@ -87,7 +93,9 @@ public class RootLayoutController {
         boolean closeClicked = systemApp.showTopKekImage();
     }
 
-
+    /**
+     * Menu item function to display basic information about application
+     */
     @FXML
     private void handleAbout(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -102,7 +110,9 @@ public class RootLayoutController {
         alert.showAndWait();
     }
 
-
+    /**
+     * Menu item function to exit the application with saving all data in files
+     */
     @FXML
     private void handleExit(){
         try {

@@ -48,14 +48,16 @@ public class LoaderCSV {
      * @param weight
      * @param height
      * @param numberOf
-     * @return container if everything is ok or null where data values are not ok
+     * @return container if everything is ok or return null where data values are not ok
      */
     private Container checkContainer(String time,String weight, String height, String numberOf){
         int tempWeight;
         int tempHeight;
         long tempTime;
+        // check if string value is ok to convert to integer
         try {
-            if(!Objects.equals(time, "") && !Objects.equals(weight, "") && !Objects.equals(height, "")) {
+            // check if any value is empty or is 0
+            if(!Objects.equals(time, "") && !Objects.equals(weight, "") && !Objects.equals(height, "0") && !Objects.equals(time, "0") && !Objects.equals(weight, "0") && !Objects.equals(height, "")) {
                 tempTime = Long.valueOf(time);
                 tempWeight = Integer.valueOf(weight);
                 tempHeight = Integer.valueOf(height);
@@ -87,6 +89,9 @@ public class LoaderCSV {
         errors.clear();
     }
 
+    /**
+     * Sort loaded containers by timestamp
+     */
     void sortContainers() {
         containers.sort((Comparator<Container>) (o1, o2) -> {
             String time1 = Long.toString(o1.getTime());

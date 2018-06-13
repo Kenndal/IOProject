@@ -16,7 +16,7 @@ public class FileManagement {
         try {
             fileWriter = new FileWriter("resources/Containers.csv", true);
             for (int i = 0; i < numberOfItems; i++) {
-                StringBuilder stringBuilder = lineConteiners(containers.get(i));
+                StringBuilder stringBuilder = lineContainers(containers.get(i));
                 fileWriter.write(stringBuilder.toString());
             }
             fileWriter.close();
@@ -31,7 +31,7 @@ public class FileManagement {
         try {
             fileWriter = new FileWriter("resources/Containers.csv", false);
             for (Container container : containers) {
-                StringBuilder stringBuilder = lineConteiners(container);
+                StringBuilder stringBuilder = lineContainers(container);
                 fileWriter.write(stringBuilder.toString());
             }
             fileWriter.close();
@@ -41,7 +41,7 @@ public class FileManagement {
         }
     }
 
-    private StringBuilder lineConteiners(Container container){
+    private StringBuilder lineContainers(Container container){
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(container.getTime()); // Conteiner time
             stringBuilder.append(",");
@@ -100,7 +100,7 @@ public class FileManagement {
      * Generate ending report and write to CSV
      * @param statistics
      */
-    void generateRaport(Statistics statistics){
+    void generateReport(Statistics statistics){
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter("resources/Raport.csv", true);

@@ -41,11 +41,11 @@ public class System implements Serializable{
      */
 
     private void setShips() {
-        ships.add(new Ship(90, 91));
-        ships.add(new Ship(90, 42));
-        ships.add(new Ship(92, 48));
-        ships.add(new Ship(58, 64));
-        ships.add(new Ship(70, 51));
+        ships.add(new Ship(13, 10));
+        ships.add(new Ship(17, 14));
+        ships.add(new Ship(11, 11));
+        ships.add(new Ship(10, 17));
+        ships.add(new Ship(12, 14));
     }
 
     public void loadExternalData(String path){
@@ -97,14 +97,14 @@ public class System implements Serializable{
             }
         }
         // Sort containers before packing
-        algorithm.sortConteiners();
+        algorithm.sortContainers();
 
 
         this.containers = algorithm.packContainers(this.ships, this.containers);
 
         // update data files
         fileManagement.rewriteToCSV(this.containers);
-        fileManagement.generateRaport(algorithm.getStatistics());
+        fileManagement.generateReport(algorithm.getStatistics());
         // return statistics to show them
         return algorithm.getStatistics();
     }
@@ -130,5 +130,17 @@ public class System implements Serializable{
      */
     public void subscribe(Observer observer){
         this.observer = observer;
+    }
+
+    public static void main(String[] args) {
+        System system = new System();
+        system.loadExternalData("resources/DataInputGroupPT1440.csv");
+        Statistics statistics =  new Statistics();
+        while(system.getContainers().size() != 0 ){
+            statistics = system.sendContainers();
+            system.getFileManagement().generateReport(statistics);
+        }
+
+        // send 255 ships
     }
 }

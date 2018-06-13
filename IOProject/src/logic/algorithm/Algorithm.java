@@ -26,7 +26,7 @@ public class Algorithm {
      * Sort containers before pack to ship.
      */
 
-    public void sortConteiners(){
+    public void sortContainers(){
         //sort
         Collections.sort(chosenContainers, (Comparator<Container>) (o1, o2) -> {
             String spaceString1 = Float.toString(o1.getSpace());

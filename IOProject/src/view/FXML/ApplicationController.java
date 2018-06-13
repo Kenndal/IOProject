@@ -44,7 +44,7 @@ public class ApplicationController implements Observer {
     private ObservableList<String> shipsName = FXCollections.observableArrayList();
     @FXML
     private void initialize() {
-
+        // init the bar chart
         String[] ships = {"Ship1","Ship2","Ship3","Ship4","Ship5"};
         shipsName.addAll(Arrays.asList(ships));
         xAxis.getCategories().addAll(shipsName);
@@ -57,6 +57,9 @@ public class ApplicationController implements Observer {
         this.systemApp.getSystem().subscribe(this); // start observe the System class to update information
     }
 
+    /**
+     * Button function to generate new containers
+     */
     public void handleGenerate(){
         if(containersTextField.getText() != null ) {
             try {
@@ -76,6 +79,9 @@ public class ApplicationController implements Observer {
         }
     }
 
+    /**
+     * Button function to sent containers
+     */
     public void handleSend(){
         if(systemApp.getSystem().getContainers().size() != 0) {
             statistics = systemApp.getSystem().sendContainers();

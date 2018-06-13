@@ -56,6 +56,10 @@ public class SystemApp extends Application {
         }
     }
 
+    /**
+     * Init tje root layout in GUI
+     *
+     */
     private void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -79,6 +83,9 @@ public class SystemApp extends Application {
         }
     }
 
+    /**
+     * Init the main system overview layout
+     */
     private void showSystemOverview() {
         try {
             FXMLLoader loader = new FXMLLoader();
